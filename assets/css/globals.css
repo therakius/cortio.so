@@ -1,0 +1,24 @@
+:root {
+    /*Colors*/
+
+    --primary-color : #0C0950;
+    --success-color: #3F7D58;
+    --error-color: #E61515;
+
+    /*Typography*/
+
+    --global-font: "Sora", sans-serif;
+    --form-font: "Roboto", sans-serif;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+

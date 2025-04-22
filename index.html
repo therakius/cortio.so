@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+
+    <link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
+/>
+    <link rel="stylesheet" href="./assets/css/globals.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+    <title>Shorten Your link</title>
+</head>
+<body>
+    <header>
+       
+        <nav>
+            <div id="logo">
+                <img src="./assets/images/link.svg" class="logo" alt="link icon">
+                <a href="">Cortio.so</a>
+            </div>
+            
+            <a href="">feedback</a>
+        </nav>
+        
+    </header>
+
+    <section id="main">
+        <h2>
+            Shorten your link here.
+        </h2>
+
+        <form action="submit">
+            <input type="text" placeholder="paste your link here..." autofocus>
+            <button>
+                <i class="ph ph-paper-plane-tilt"></i>
+            </button>
+        </form>
+
+        <div class="result">
+            <div class="result-shortened">
+                <p>
+                    https://cortio.so/#6587youth
+                </p>
+            </div>
+            <button id="copy">
+                copy <i class="ph ph-clipboard-text"></i>
+            </button>
+            <button id="share">
+                share <i class="ph ph-share-fat"></i>
+            </button>
+        </div>
+    </section>
+
+<footer>
+    <div class="icons">
+        <i class="ph ph-github-logo"></i>
+        <i class="ph ph-linkedin-logo"></i>
+        <i class="ph ph-medium-logo"></i>
+    </div>
+    <p>
+        made with  <i class="ph ph-heart"></i>  by Gasparc-101.
+    </p>
+</footer>
+</body>
+</html>

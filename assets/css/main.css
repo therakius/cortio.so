@@ -1,0 +1,128 @@
+* {
+    font-family: var(--global-font);
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+#logo a {
+    margin-left: 0;
+    font-size: 1.5rem;
+}
+
+#logo img {
+    height: 2rem;
+    width: 2rem;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.7rem;
+    margin: 1%;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 30vh;
+    position: relative;
+    top: 35%;
+}
+
+#main > form, #main > .result {
+    width: 50%;
+    height: 2.2rem;
+    margin-top: 2rem;
+    border: 1.95px solid black;
+    border-radius: 12px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#main > form input {
+    background-color: transparent;
+    width: 90%;
+    height: 1.6rem;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+
+#main > form i {
+    font-size: 1.5rem;
+    margin-right: 10px
+}
+
+#main .result {
+    margin-top: 1.4rem;
+    border: none;
+    display: none;
+}
+
+#main > .result .result-shortened{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 1.95px solid black;
+    border-radius: 15px;
+
+}
+
+#copy, #share {
+    border: 1.95px solid black;
+    border-radius: 15px;
+    height: calc(2.2rem + 4px);
+    width: 17%;
+    font-weight: 400;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding-bottom: 12px;
+}
+
+footer .icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+footer .icons i {
+    font-size: 1.4rem;
+}
+
+
