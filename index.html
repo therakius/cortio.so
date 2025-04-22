@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="./assets/css/globals.css">
     <link rel="stylesheet" href="./assets/css/main.css">
 
+    <script defer src="./assets/js/index.js"></script>
+
     <title>Shorten Your link</title>
 </head>
 <body>
@@ -39,14 +41,14 @@
 
         <form action="submit">
             <input type="text" placeholder="paste your link here..." autofocus>
-            <button>
+            <button type="submit" id="submt-btn">
                 <i class="ph ph-paper-plane-tilt"></i>
             </button>
         </form>
 
         <div class="result">
             <div class="result-shortened">
-                <p>
+                <p id="result-text">
                     https://cortio.so/#6587youth
                 </p>
             </div>
