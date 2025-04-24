@@ -112,7 +112,7 @@ header nav {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: bisque;
+    background-color: rgb(228, 222, 222);
     height: 35vh;
     width: 35%;
     place-self: center;
