@@ -113,7 +113,7 @@ header nav {
     justify-content: center;
     flex-direction: column;
     background-color: bisque;
-    height: 45vh;
+    height: 35vh;
     width: 35%;
     place-self: center;
     box-sizing: border-box;
@@ -148,7 +148,7 @@ header nav {
 }
 #feedback-form textarea{
     resize: none;
-    height: 50%;
+    height: 9vh;
     margin-top: 30px;
     font-size: 1rem;
     background-color: transparent;
@@ -166,6 +166,14 @@ header nav {
     border-radius: 5px;
     border: .5px solid black;
     font-weight: 400;
+}
+
+#feedback #exit {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 footer {
     position: absolute;
