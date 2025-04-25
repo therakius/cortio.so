@@ -1,4 +1,3 @@
-const toShare = document.querySelector('#share');
 const toCopy = document.getElementById('copy');
 const link = document.getElementById('result-text').innerText;
 const displayFeedbackForm = document.getElementById('tofeedback')
@@ -6,7 +5,19 @@ const feedbackForm = document.getElementById('feedback')
 const feedbackFormExit = document.querySelector('#feedback > #exit')
 const feedbackLinkButton = document.getElementById('tofeedback')
 
+const toShare = document.querySelector('#share');
+const popup = document.getElementById('share-popup');
 
+const exitShare = document.getElementById('exit')
+
+
+exitShare.addEventListener("click", ()=>{
+    popup.classList.remove('active');
+})
+
+toShare.addEventListener('click', ()=>{
+ popup.classList.add('active');
+})
 
 toCopy.addEventListener('click', async ()=>{
    
