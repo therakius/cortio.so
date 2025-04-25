@@ -15,7 +15,8 @@ exitShare.addEventListener("click", ()=>{
     popup.classList.remove('active');
 })
 
-toShare.addEventListener('click', ()=>{
+toShare.addEventListener('click',async()=>{
+    await navigator.clipboard.writeText(link);
  popup.classList.add('active');
 })
 
