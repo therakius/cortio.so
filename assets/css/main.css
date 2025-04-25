@@ -119,6 +119,11 @@ header nav {
     box-sizing: border-box;
 }
 
+#feedback.inactive{
+    display: none;
+    transition: 1s ease-in-out;
+}
+
 #feedback h2 {
     text-align: center;
 }
