@@ -1,5 +1,5 @@
 const toCopy = document.getElementById('copy');
-const link = document.getElementById('result-text').innerText;
+const link = document.getElementById('result-text').innerText.trim();
 const displayFeedbackForm = document.getElementById('tofeedback')
 const feedbackForm = document.getElementById('feedback')
 const feedbackFormExit = document.querySelector('#feedback-exit')
