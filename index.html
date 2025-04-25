@@ -39,7 +39,7 @@
         </h2>
 
         <form action="submit">
-            <input type="text" placeholder="paste your link here..." autofocus>
+            <input type="text" placeholder="paste your link here..." autofocus required>
             <button type="submit" id="submit-btn">
                 <i class="ph ph-paper-plane-tilt"></i>
             </button>
@@ -71,15 +71,15 @@
             </h2>
 
             <div class="name-email">
-                <input type="text" placeholder="name*">
+                <input type="text" placeholder="name*" name="name" required>
 
-                <input type="email" placeholder="email*">
+                <input type="email" placeholder="email*" name="email" required>
             </div>
 
 
-            <input type="text" placeholder="subject*">
+            <input type="text" placeholder="subject*" name="subject" required>
 
-            <textarea name="message" id="message" placeholder="message*"></textarea>
+            <textarea name="message" id="message" placeholder="message*" name="message" required></textarea>
 
             <button id="send">Send</button>
         </form>
