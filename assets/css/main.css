@@ -48,7 +48,7 @@ header nav {
     top: 35%;
 }
 
-#main > form, #main > .result {
+#main > form, #main > #result-form {
     width: 50%;
     height: 2.2rem;
     margin-top: 2rem;
@@ -75,13 +75,16 @@ header nav {
     margin-right: 10px
 }
 
-#main .result {
+#main #result-form {
     margin-top: 1.4rem;
     border: none;
-    display: non;
 }
 
-#main > .result .result-shortened{
+#main #result-form.hidden {
+    display: none;
+} 
+
+#main > #result-form .result-shortened{
     width: 400px;
     height: 100%;
     display: flex;
