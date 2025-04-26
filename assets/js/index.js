@@ -124,6 +124,3 @@ onSubmit.addEventListener('click', (event)=>{
     
 })
 
-console.log(blurred()[1])
-console.log(ButtonsInMain)
-
