@@ -13,17 +13,30 @@ const resultForm = document.getElementById('result-form');
 const ButtonsInMain = document.querySelectorAll('#main button')
 
 
+
 exitShare.addEventListener("click", ()=>{
     popup.classList.remove('active');
+    document.getElementById('footer').style.zIndex = -1;
+
+    popup.addEventListener('transitionend', function handler(){
+        document.getElementById('footer').style.zIndex = 'auto';
+    })
+
 })
 
 toShare.addEventListener('click',async()=>{
     await navigator.clipboard.writeText(link);
     popup.classList.add('active');
+    document.getElementById('footer').style.zIndex = -1;
 
     if(!displayFeedbackForm.classList.contains('inactive')){
         feedbackForm.classList.add('inactive')
     }
+
+    popup.addEventListener('transitionend', ()=>{
+        document.getElementById('footer').style.zIndex = -1;
+    })
+
 })
 
 let blurred = ()=>{

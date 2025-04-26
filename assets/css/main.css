@@ -9,6 +9,7 @@ body{
     width: 100vw;
     box-sizing: border-box;
     display: grid;
+    position: relative;
 }
 
 #logo a {
@@ -214,10 +215,11 @@ header nav {
     border-radius: 10px;
     height: 25vh;
     width: 31.9%;
-    background-color: rgb(228, 222, 222);
+    background-color: #e4dede;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 999;
 }
 
 #share-popup.active {
@@ -295,7 +297,6 @@ footer {
     display: grid;
     place-items: center;
     padding-bottom: 12px;
-    z-index: -1;
 }
 
 footer .icons{
@@ -308,6 +309,17 @@ footer .icons{
 
 footer .icons i {
     font-size: 1.4rem;
+    color: black;
+}
+
+footer a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer a:hover {
+    transition: .3s ease-in-out;
+    scale: 1.5;
 }
 
 
