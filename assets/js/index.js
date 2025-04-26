@@ -10,6 +10,8 @@ const popup = document.getElementById('share-popup');
 const exitShare = document.getElementById('exit')
 const resultForm = document.getElementById('result-form');
 
+const ButtonsInMain = document.querySelectorAll('#main button')
+
 
 exitShare.addEventListener("click", ()=>{
     popup.classList.remove('active');
@@ -17,8 +19,19 @@ exitShare.addEventListener("click", ()=>{
 
 toShare.addEventListener('click',async()=>{
     await navigator.clipboard.writeText(link);
- popup.classList.add('active');
+    popup.classList.add('active');
+
+    if(!displayFeedbackForm.classList.contains('inactive')){
+        feedbackForm.classList.add('inactive')
+    }
 })
+
+let blurred = ()=>{
+
+    const blurBehind = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')]
+
+    return blurBehind;
+}
 
 toCopy.addEventListener('click', async ()=>{
    
@@ -45,11 +58,47 @@ displayFeedbackForm.addEventListener('click', (event)=>{
     feedbackForm.classList.remove('inactive')
     feedbackLinkButton.style.color = 'var(--primary-color)'
 
+    if(popup.classList.contains('active')){
+        popup.classList.remove('active')
+    }
+
+    blurred().forEach(item => {
+        item.classList.add('blurred')
+        item.style.cursor = 'auto'
+    })
+
+    document.querySelector('#input-form input').disabled = true;
+
+    ButtonsInMain.forEach(button => {
+        button.disabled = true;
+        button.style.cursor = 'auto'
+    })
+
+
 })
 
 feedbackFormExit.addEventListener('click', ()=>{
     feedbackForm.classList.add('inactive')
-    feedbackLinkButton.style.color = 'black'
+    feedbackLinkButton.style.color = 'black';
+
+    blurred().forEach(item => {
+        item.classList.remove('blurred')
+    })
+
+    blurred().forEach(item => {
+        item.classList.remove('blurred')
+        item.style.cursor = 'auto'
+    })
+
+    document.querySelector('#input-form input').disabled = false;
+
+    ButtonsInMain.forEach(button => {
+        button.disabled = false;
+        button.style.cursor = 'pointer'
+    })
+
+
+
 })
 
 onSubmit.addEventListener('click', (event)=>{
@@ -61,4 +110,7 @@ onSubmit.addEventListener('click', (event)=>{
     }, 15000);
     
 })
+
+console.log(blurred()[1])
+console.log(ButtonsInMain)
 

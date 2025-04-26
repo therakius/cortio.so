@@ -224,6 +224,9 @@ header nav {
     transform: translate(-50%, 0);
 }
 
+.blurred {
+    filter: blur(5px);
+}
 
 
 #share-popup .socials {
