@@ -12,6 +12,12 @@ const resultForm = document.getElementById('result-form');
 
 const ButtonsInMain = document.querySelectorAll('#main button')
 
+let blurred = ()=>{
+
+    const blurBehind = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')]
+
+    return blurBehind;
+}
 
 
 exitShare.addEventListener("click", ()=>{
@@ -39,13 +45,6 @@ toShare.addEventListener('click',async()=>{
 
 })
 
-let blurred = ()=>{
-
-    const blurBehind = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')]
-
-    return blurBehind;
-}
-
 toCopy.addEventListener('click', async ()=>{
    
     try{
@@ -68,6 +67,11 @@ toCopy.addEventListener('click', async ()=>{
 
 displayFeedbackForm.addEventListener('click', (event)=>{
     event.preventDefault()
+
+    popup.addEventListener('transitionend', function handler(){
+        document.getElementById('footer').style.zIndex = 'auto';
+    })
+    
     feedbackForm.classList.remove('inactive')
     feedbackLinkButton.style.color = 'var(--primary-color)'
 
