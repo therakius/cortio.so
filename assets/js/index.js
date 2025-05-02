@@ -12,6 +12,8 @@ const resultForm = document.getElementById('result-form');
 
 const ButtonsInMain = document.querySelectorAll('#main button')
 
+const copyFromShare = document.getElementById('copied');
+
 let blurred = ()=>{
 
     const blurBehind = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')]
@@ -45,6 +47,9 @@ toShare.addEventListener('click',async()=>{
 
 })
 
+
+// copy functionalities
+
 toCopy.addEventListener('click', async ()=>{
    
     try{
@@ -65,6 +70,29 @@ toCopy.addEventListener('click', async ()=>{
     }
 });
 
+copyFromShare.addEventListener('click', async ()=>{
+    console.log("You clicked me!")
+    try{
+
+        await navigator.clipboard.writeText(link);
+        document.querySelector('.shortened > i').classList.remove('ph-clipboard-text');
+        document.querySelector('.shortened > i').classList.add('ph-check-fat');
+        copyFromShare.style.color = "var(--success-color)";
+
+        setTimeout(()=>{
+            document.querySelector('.shortened > i').classList.add('ph-clipboard-text');
+            document.querySelector('.shortened > i').classList.remove('ph-check-fat');
+           copyFromShare.style.color = "black";
+        }, 3000)
+
+
+        console.log("link copied successfully")      
+   } catch (err) {
+       console.log(err)
+   }
+})
+
+// displaying feedback form popup
 displayFeedbackForm.addEventListener('click', (event)=>{
     event.preventDefault()
 
@@ -118,6 +146,7 @@ feedbackFormExit.addEventListener('click', ()=>{
 
 })
 
+// submitting the long link
 onSubmit.addEventListener('click', (event)=>{
     event.preventDefault()
 
@@ -127,4 +156,3 @@ onSubmit.addEventListener('click', (event)=>{
     }, 15000);
     
 })
-
