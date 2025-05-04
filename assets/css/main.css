@@ -399,14 +399,15 @@ footer a:hover {
 
     }
 
-    form button {
-        display: none;
-    }
-
-
     #result-form > .result-shortened {
         width: 100%;
-        height: 3rem;       
+        height: 3rem;
+        justify-content: space-between;
+        padding-right: 10px;   
+    }
+
+    #result-form > .result-shortened i {
+        font-size: 1.5rem;
     }
 
 
