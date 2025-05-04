@@ -91,14 +91,14 @@ header nav {
     display: flex;
     align-items: center;
     padding-left: 10px;
-    border: 1.95px solid black;
-    border-radius: 15px;
+    border-radius: 12px;
+    border: 1px solid black;
 
 }
 
 #copy, #share {
     border: 1.95px solid black;
-    border-radius: 15px;
+    border-radius: 12px;
     height: calc(2.2rem + 4px);
     width: 17%;
     font-weight: 400;
@@ -322,4 +322,99 @@ footer a:hover {
     scale: 1.5;
 }
 
+#dotted {
+    display: none;
+}
 
+
+@media only screen and (max-width: 575px) {
+
+    html::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
+    html {
+        font-size: 0.875rem; /* Reduces the base font size for all text */
+        overflow: -moz-hidden-unscrollable;
+    }
+
+    h1 {
+        font-size: 1.5rem; /* 24px */
+    }
+
+    h2 {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    h3 {
+        font-size: 1.125rem; /* 18px */
+    }
+
+    h4 {
+        font-size: 1rem; /* 16px */
+    }
+
+    h5 {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    h6 {
+        font-size: 0.75rem; /* 12px */
+    }
+
+    body {
+        display: block;
+    }
+
+    #dotted {
+        display: block;
+    }
+
+    #responsive {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        gap: 10px;
+    }
+
+    #responsive > a{
+
+        display: none;
+    }
+
+    #main {
+        width: 100%;
+        height: 20vh;
+        box-sizing: border-box;
+        top: 30%;
+    }
+
+    #main > form, #main  #result-form {
+        width: 90%;
+        height: 3rem;
+        box-sizing: border-box;
+        font-size: 1rem;
+
+    }
+
+    form button {
+        display: none;
+    }
+
+
+    #result-form > .result-shortened {
+        width: 100%;
+        height: 3rem;       
+    }
+
+
+    footer {
+        display: none;
+    }
+
+    #copy, #share {
+        display: none;
+    }
+
+
+}
