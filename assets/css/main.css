@@ -322,9 +322,11 @@ footer a:hover {
     scale: 1.5;
 }
 
-#dotted {
+#dotted, .button-mobile, #send-button-conteiner{
     display: none;
 }
+
+
 
 
 @media only screen and (max-width: 575px) {
@@ -416,5 +418,41 @@ footer a:hover {
         display: none;
     }
 
+    .button-mobile {
+        display: block;
+        border: 1px solid black;
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+    }
 
+    .button-mobile > i {
+        font-size: 24px;
+    }
+    #copy-mobile,  #share-mobile {
+        position: fixed;
+        left: 81%;
+    }
+
+    #share-mobile {
+        bottom: 30%;
+    }
+
+    #copy-mobile {
+        bottom: 15%;
+    }
+
+    #send-button-conteiner {
+        position: absolute;
+        bottom: 3px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 2% 0;
+    }
+
+    #send-mobile {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
 }
