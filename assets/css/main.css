@@ -386,9 +386,9 @@ footer a:hover {
 
     #main {
         width: 100%;
-        height: 20vh;
+        height: 30vh;
         box-sizing: border-box;
-        top: 30%;
+        top: 35%;
     }
 
     #main > form, #main  #result-form {
@@ -404,6 +404,7 @@ footer a:hover {
         height: 3rem;
         justify-content: space-between;
         padding-right: 10px;   
+        
     }
 
     #result-form > .result-shortened i {
@@ -441,6 +442,10 @@ footer a:hover {
 
     #copy-mobile {
         bottom: 15%;
+    }
+
+    .hidden {
+        display: none;
     }
 
     #send-button-conteiner {
