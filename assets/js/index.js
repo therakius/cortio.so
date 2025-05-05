@@ -156,3 +156,48 @@ onSubmit.addEventListener('click', (event)=>{
     }, 15000);
     
 })
+
+// function to return object with links to the apps
+
+function linksToApp(){
+
+    const shareTo = {
+        text: encodeURIComponent("Check this out - it might be usefull for you"),
+        link: encodeURIComponent(link)
+    }
+
+    const body = encodeURIComponent(`Check this out – it might be useful for you: ${link}`);
+
+
+    const socials = {
+        whatsapp: `https://web.whatsapp.com/send?text=${shareTo.text}%20${shareTo.link}`,
+        telegram: `https://web.telegram.org/k/#@share/url?url=${shareTo.link}&text=${shareTo.text}`,
+        twitter: `https://twitter.com/intent/tweet?url=${shareTo.link}&text=${shareTo.text}`,
+        linkedin: `https://linkedin.com/sharing/share-offsite/?url=${shareTo.link}&text=${shareTo.text}`,
+        email: `mailto:?subject=${encodeURIComponent("Interesting")}&body=${body}`,
+        facebook: `https://facebook.com/sharer/sharer.php?u=${shareTo.link}`
+        
+    }
+
+    return socials;
+}
+
+// Sharing event
+
+document.getElementById('socials').addEventListener('click', (e)=>{
+
+    popup.classList.remove('active')
+
+    const social = e.target.dataset.social;
+
+    console.log(social)
+    setTimeout(() => {
+         if(social && linksToApp()[social]) {
+        window.open(linksToApp()[social], "_blank")
+         }
+    }, 800);
+   
+
+    console.log(linksToApp()[social])
+
+})

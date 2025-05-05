@@ -231,14 +231,14 @@ header nav {
 }
 
 
-#share-popup .socials {
+#share-popup #socials {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
 }
 
-#share-popup .socials > .icons {
+#share-popup #socials > .icons {
     margin-top: 15px;
     display: flex;
     flex-direction: column;
@@ -262,7 +262,7 @@ header nav {
     cursor: pointer;
 }
 
-#share-popup .socials > .icons p {
+#share-popup #socials > .icons p {
     font-size: small;
 }
 
