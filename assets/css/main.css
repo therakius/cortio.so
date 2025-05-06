@@ -201,16 +201,12 @@ header nav {
     cursor: pointer;
 }
 
-#share-popup h3 {
-    margin-top: 30px;
-}
 #share-popup {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 110%);
     transition: transform 1s ease;
-    
     padding: 0 30px 10px 30px;
     border-radius: 10px;
     height: 25vh;
@@ -218,6 +214,7 @@ header nav {
     background-color: #e4dede;
     display: flex;
     flex-direction: column;
+    row-gap: 15px;
     align-items: center;
     z-index: 999;
 }
