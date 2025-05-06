@@ -223,3 +223,13 @@ toggHamburger.addEventListener('click', (e)=>{
 
 } )
 
+
+feedbackLinkButton.addEventListener('click', (e)=>{
+    if(toggHamburger.classList.contains('ph-x')) {
+        toggHamburger.classList.toggle('ph-x')
+        feedbackLinkButton.classList.add('hidden')
+    }
+})
+
+
+
