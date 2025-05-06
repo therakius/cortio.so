@@ -149,9 +149,9 @@ feedbackFormExit.addEventListener('click', ()=>{
 })
 
 // submitting the long link
+
 onSubmit.addEventListener('click', (event)=>{
     event.preventDefault()
-
     resultForm.classList.remove('hidden')
     setTimeout(() => {
         resultForm.classList.add('hidden')
@@ -230,6 +230,20 @@ feedbackLinkButton.addEventListener('click', (e)=>{
         feedbackLinkButton.classList.add('hidden')
     }
 })
+
+console.log(screen.width)
+
+if (document.documentElement.clientWidth < 600) {
+    const buttonC = document.getElementById('form-copy-btn')
+    buttonC.disabled = true;
+    buttonC.style.color= 'black'
+
+    const buttonS = document.getElementById('submit-btn')
+    buttonS.disabled = true;
+    buttonS.style.color = 'black'
+    console.log(`your screen is ${document.documentElement.clientWidth}px wide`)
+
+}
 
 
 
