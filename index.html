@@ -29,10 +29,14 @@
                 <img src="./assets/images/link.svg" class="logo" alt="link icon">
                 <a href="">Cortio.so</a>
             </div>
-            
-            <a href="" id="tofeedback">feedback</a>
+
+            <div id="responsive">
+                <i class="ph ph-list" id="dotted"></i>
+                <a href="" id="tofeedback" class="hidden">feedback</a>
+            </div>
+
+
         </nav>
-        
     </header>
 
     <section id="main">
@@ -43,7 +47,7 @@
         <form action="submit" id="input-form">
             <input type="text" placeholder="paste your link here..." autofocus required id="user-input">
             <button type="submit" id="submit-btn">
-                <i class="ph ph-paper-plane-tilt"></i>
+                <i class="ph ph-paper-plane-tilt" id="form-copy-btn"></i>
             </button>
         </form>
 
@@ -52,7 +56,12 @@
                 <p id="result-text">
                     https://github.com/gasparc-101
                 </p>
+
+                <button>
+                    <i class="ph ph-clipboard-text"></i>
+                </button>
             </div>
+
             <button id="copy">
                 copy <i class="ph ph-clipboard-text"></i>
             </button>
@@ -61,6 +70,14 @@
             </button>
         </div>
     </section>
+
+    <button id="copy-mobile" class="button-mobile hidden">
+        <i class="ph ph-clipboard-text"></i>
+    </button>
+
+    <button id="share-mobile" class="button-mobile hidden">
+        <i class="ph ph-share-fat"></i>
+    </button>
 
 
 
@@ -83,7 +100,10 @@
 
             <textarea name="message" id="message" placeholder="message*" name="message" required></textarea>
 
-            <button id="send">Send</button>
+            <div class="centered-button">
+                <button id="send">Send</button>
+            </div>
+            
         </form>
     </section>
 
@@ -158,6 +178,12 @@
     </section>
 </section>
 
+
+<div id="send-button-conteiner">
+    <button id="send-mobile" class="button-mobile">
+        <i class="ph ph-paper-plane-tilt"></i>
+    </button>
+</div>
 
 <footer id="footer">
     <div class="icons">

@@ -14,6 +14,8 @@ const ButtonsInMain = document.querySelectorAll('#main button')
 
 const copyFromShare = document.getElementById('copied');
 
+const sendForMobile = document.getElementById('send-mobile')
+
 let blurred = ()=>{
 
     const blurBehind = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')]
@@ -147,9 +149,9 @@ feedbackFormExit.addEventListener('click', ()=>{
 })
 
 // submitting the long link
+
 onSubmit.addEventListener('click', (event)=>{
     event.preventDefault()
-
     resultForm.classList.remove('hidden')
     setTimeout(() => {
         resultForm.classList.add('hidden')
@@ -201,3 +203,92 @@ document.getElementById('socials').addEventListener('click', (e)=>{
     console.log(linksToApp()[social])
 
 })
+
+//mobile interactions
+
+const copyShareButtons = [document.getElementById('copy-mobile'), document.getElementById('share-mobile')]
+const toggHamburger = document.getElementById('dotted');
+
+sendForMobile.addEventListener('click', (e)=>{
+    e.preventDefault();
+    resultForm.classList.remove('hidden')
+
+    copyShareButtons[0].addEventListener('click', async (e)=>{
+        try{
+
+            await navigator.clipboard.writeText(link);
+            copyShareButtons[0].innerHTML = '<i class="ph ph-check-fat"></i>';
+            copyShareButtons[0].style.color = "var(--success-color)";
+   
+            setTimeout(()=>{
+                copyShareButtons[0].innerHTML= '<i class="ph ph-clipboard-text"></i>'
+               copyShareButtons[0].style.color = "black";
+            }, 3000)
+   
+   
+            console.log("link copied successfully")      
+       } catch (err) {
+           console.log(err)
+       }
+    })
+        setTimeout(() => {
+
+            copyShareButtons[0].classList.remove('hidden')
+        }, 800);
+
+        setTimeout(() => {
+            copyShareButtons[1].classList.remove('hidden')
+
+        }, 500);
+
+        setTimeout(() => {
+            copyShareButtons[0].classList.add('hidden');
+        
+            setTimeout(() => {
+                copyShareButtons[1].classList.add('hidden');
+        
+                setTimeout(() => {
+                    resultForm.classList.add('hidden');
+                }, 1000); // 1s depois do botão 1 sumir
+        
+            }, 1000); // 1s depois do botão 0 sumir
+        
+        }, 15000); // Espera inicial de 15s        
+
+})
+
+toggHamburger.addEventListener('click', (e)=>{
+    toggHamburger.classList.toggle('ph-x')
+
+    if (!toggHamburger.classList.contains('ph-x')) {
+        document.getElementById('tofeedback').classList.add('hidden')
+    } else {
+        document.getElementById('tofeedback').classList.remove('hidden')
+    }
+
+} )
+
+
+feedbackLinkButton.addEventListener('click', (e)=>{
+    if(toggHamburger.classList.contains('ph-x')) {
+        toggHamburger.classList.toggle('ph-x')
+        feedbackLinkButton.classList.add('hidden')
+    }
+})
+
+console.log(screen.width)
+
+if (document.documentElement.clientWidth < 600) {
+    const buttonC = document.getElementById('form-copy-btn')
+    buttonC.disabled = true;
+    buttonC.style.color= 'black'
+
+    const buttonS = document.getElementById('submit-btn')
+    buttonS.disabled = true;
+    buttonS.style.color = 'black'
+    console.log(`your screen is ${document.documentElement.clientWidth}px wide`)
+
+}
+
+
+

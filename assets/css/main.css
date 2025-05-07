@@ -91,14 +91,14 @@ header nav {
     display: flex;
     align-items: center;
     padding-left: 10px;
-    border: 1.95px solid black;
-    border-radius: 15px;
+    border-radius: 12px;
+    border: 1px solid black;
 
 }
 
 #copy, #share {
     border: 1.95px solid black;
-    border-radius: 15px;
+    border-radius: 12px;
     height: calc(2.2rem + 4px);
     width: 17%;
     font-weight: 400;
@@ -319,4 +319,199 @@ footer a:hover {
     scale: 1.5;
 }
 
+#dotted, .button-mobile, #send-button-conteiner{
+    display: none;
+}
 
+
+
+
+@media only screen and (max-width: 575px) {
+
+    html::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
+    html {
+        font-size: 0.875rem; /* Reduces the base font size for all text */
+        overflow: -moz-hidden-unscrollable;
+    }
+
+    h1 {
+        font-size: 1.5rem; /* 24px */
+    }
+
+    h2 {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    h3 {
+        font-size: 1.125rem; /* 18px */
+    }
+
+    h4 {
+        font-size: 1rem; /* 16px */
+    }
+
+    h5 {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    h6 {
+        font-size: 0.75rem; /* 12px */
+    }
+
+    header {
+        padding: 1% 5% 1% 5%;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: block;
+    }
+
+    #dotted {
+        display: block;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    #responsive {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        gap: 15px;
+    }
+
+
+    #main {
+        width: 100%;
+        height: 30vh;
+        box-sizing: border-box;
+        top: 35%;
+    }
+
+    #main > form, #main  #result-form {
+        width: 90%;
+        height: 3rem;
+        box-sizing: border-box;
+        font-size: 1rem;
+
+    }
+
+    #result-form > .result-shortened {
+        width: 100%;
+        height: 3rem;
+        justify-content: space-between;
+        padding-right: 10px;   
+        
+    }
+
+    #result-form > .result-shortened i {
+        font-size: 1.5rem;
+    }
+
+
+    footer {
+        display: none;
+    }
+
+    #copy, #share {
+        display: none;
+    }
+
+    .button-mobile {
+        display: block;
+        border: 1px solid black;
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+    }
+
+    .button-mobile > i {
+        font-size: 24px;
+    }
+    #copy-mobile,  #share-mobile {
+        position: fixed;
+        left: 81%;
+    }
+
+    #share-mobile {
+        bottom: 30%;
+    }
+
+    #copy-mobile {
+        bottom: 15%;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #send-button-conteiner {
+        position: absolute;
+        bottom: 3px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 2% 0;
+    }
+
+    #send-mobile {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    #feedback {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 70vh;
+        z-index: 99;
+        border-radius: 15px;
+        transform: translate(0, 0);
+        transition: transform .3s ease-in-out;
+        overflow: auto;
+        background: beige;
+    }
+    
+    #feedback.inactive {
+        display: block;
+        transform: translate(0, 110%);
+    }
+    
+
+    #feedback-form {
+        height: 100%;
+        gap: 15px;
+        display: flex;
+        padding-top: 40px;
+    }
+    #feedback-form .name-email{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #feedback-form textarea {
+        height: 15vh;
+    }
+
+    #feedback-form input {
+        width: 100%;
+    }
+
+    #feedback-form .centered-button {
+        display: flex;
+        justify-content: center;
+        padding: 2% 0;
+        width: 100%;
+        margin-top: 10vh;
+    }
+
+    #feedback-form .centered-button #send {
+        position: inherit;
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 50%;
+    }
+}
