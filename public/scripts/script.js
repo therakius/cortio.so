@@ -1,5 +1,5 @@
 const toCopy = document.getElementById('copy');
-const link = document.getElementById('result-text').innerText.trim();
+let link = document.getElementById('result-text');
 const displayFeedbackForm = document.getElementById('tofeedback')
 const feedbackForm = document.getElementById('feedback')
 const feedbackFormExit = document.querySelector('#feedback-exit')
@@ -15,6 +15,8 @@ const ButtonsInMain = document.querySelectorAll('#main button')
 const copyFromShare = document.getElementById('copied');
 
 const sendForMobile = document.getElementById('send-mobile')
+
+const resultToBeSent = document.getElementById('user-input');
 
 let blurred = ()=>{
 
@@ -49,6 +51,36 @@ toShare.addEventListener('click',async()=>{
 
 })
 
+// submitting the long link
+
+onSubmit.addEventListener('click', async (event)=>{
+    event.preventDefault()
+    const userUrl = resultToBeSent.value
+    let shortenedLink;
+    
+    try {
+        const response = await axios.post('/submit', {userUrl});
+
+        console.log('Resposta do servidor:', response.data);
+        console.log(response.data.link);
+        link.innerText = response.data.link;      
+        
+        console.log(link)
+
+        
+    } catch (error) {
+        console.error('erro ao enviar dados')
+    }
+
+    resultForm.classList.remove('hidden')
+
+    setTimeout(() => {
+        resultForm.classList.remove('hidden')
+    }, 15000);
+
+
+    
+})
 
 // copy functionalities
 
@@ -56,7 +88,7 @@ toCopy.addEventListener('click', async ()=>{
    
     try{
 
-         await navigator.clipboard.writeText(link);
+         await navigator.clipboard.writeText(link.innerText);
          toCopy.innerHTML = 'copied <i class="ph ph-check-fat"></i>';
          toCopy.style.color = "var(--success-color)";
 
@@ -71,12 +103,11 @@ toCopy.addEventListener('click', async ()=>{
         console.log(err)
     }
 });
-
 copyFromShare.addEventListener('click', async ()=>{
     console.log("You clicked me!")
     try{
 
-        await navigator.clipboard.writeText(link);
+        await navigator.clipboard.writeText(link.innerText);
         document.querySelector('.shortened > i').classList.remove('ph-clipboard-text');
         document.querySelector('.shortened > i').classList.add('ph-check-fat');
         copyFromShare.style.color = "var(--success-color)";
@@ -148,16 +179,6 @@ feedbackFormExit.addEventListener('click', ()=>{
 
 })
 
-// submitting the long link
-
-onSubmit.addEventListener('click', (event)=>{
-    event.preventDefault()
-    resultForm.classList.remove('hidden')
-    setTimeout(() => {
-        resultForm.classList.add('hidden')
-    }, 15000);
-    
-})
 
 // function to return object with links to the apps
 
