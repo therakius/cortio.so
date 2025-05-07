@@ -269,7 +269,7 @@ header nav {
 }
 
 #share-popup h6 {
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: 400;
     font-size: 0.8rem;
 }
@@ -285,6 +285,7 @@ header nav {
 
 #share-popup .shortened > h5 {
     font-weight: 450;
+    font-size: .875rem;
 }
 
 footer {
@@ -514,4 +515,13 @@ footer a:hover {
         height: 4.5rem;
         border-radius: 50%;
     }
+
+    .result-shortened > #clipboard-mobile {
+        display: block !important;
+    }
+    
+}
+
+.result-shortened > #clipboard-mobile {
+    display: none;
 }
