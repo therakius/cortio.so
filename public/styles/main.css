@@ -214,7 +214,6 @@ header nav {
     background-color: #e4dede;
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
     align-items: center;
     z-index: 999;
 }
@@ -276,11 +275,12 @@ header nav {
 
 
 #share-popup .shortened {
-    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
+    top: 25px;
 }
 
 #share-popup .shortened > h5 {
