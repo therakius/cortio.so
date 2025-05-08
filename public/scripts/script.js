@@ -1,9 +1,8 @@
 const toCopy = document.getElementById('copy');
 let link = document.getElementById('result-text');
-const displayFeedbackForm = document.getElementById('tofeedback')
+const feedbackLinkButton = document.getElementById('tofeedback')
 const feedbackForm = document.getElementById('feedback')
 const feedbackFormExit = document.querySelector('#feedback-exit')
-const feedbackLinkButton = document.getElementById('tofeedback')
 const onSubmit = document.getElementById('submit-btn')
 const toShare = document.querySelector('#share');
 const popup = document.getElementById('share-popup');
@@ -26,7 +25,7 @@ let blurred = ()=>{
 }
 
 
-exitShare.addEventListener("click", ()=>{
+exitShare.addEventListener("click", function handleExitShare(){
     popup.classList.remove('active');
     document.getElementById('footer').style.zIndex = -1;
 
@@ -36,12 +35,12 @@ exitShare.addEventListener("click", ()=>{
 
 })
 
-toShare.addEventListener('click',async()=>{
+toShare.addEventListener('click', async function handleShareFunctionality(){
     await navigator.clipboard.writeText(link);
     popup.classList.add('active');
     document.getElementById('footer').style.zIndex = -1;
 
-    if(!displayFeedbackForm.classList.contains('inactive')){
+    if(!feedbackLinkButton.classList.contains('inactive')){
         feedbackForm.classList.add('inactive')
     }
 
@@ -53,7 +52,7 @@ toShare.addEventListener('click',async()=>{
 
 // submitting the long link
 
-onSubmit.addEventListener('click', async (event)=>{
+onSubmit.addEventListener('click', async function handlerFormSubmission(event){
     event.preventDefault()
     const userUrl = resultToBeSent.value
     let shortenedLink;
@@ -101,7 +100,7 @@ toCopy.addEventListener('click', async ()=>{
         console.log(err)
     }
 });
-copyFromShare.addEventListener('click', async ()=>{
+copyFromShare.addEventListener('click', async function handleCopyFromShare(){
     console.log("You clicked me!")
     try{
 
@@ -124,7 +123,7 @@ copyFromShare.addEventListener('click', async ()=>{
 })
 
 // displaying feedback form popup
-displayFeedbackForm.addEventListener('click', (event)=>{
+feedbackLinkButton.addEventListener('click', function handleFeedbackFormPopup(event){
     event.preventDefault()
 
     popup.addEventListener('transitionend', function handler(){
@@ -153,7 +152,7 @@ displayFeedbackForm.addEventListener('click', (event)=>{
 
 })
 
-feedbackFormExit.addEventListener('click', ()=>{
+feedbackFormExit.addEventListener('click', function handleFeedbackformExit(){
     feedbackForm.classList.add('inactive')
     feedbackLinkButton.style.color = 'black';
 
