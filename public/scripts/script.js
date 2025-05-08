@@ -230,8 +230,26 @@ document.getElementById('socials').addEventListener('click', (e)=>{
 const copyShareButtons = [document.getElementById('copy-mobile'), document.getElementById('share-mobile')]
 const toggHamburger = document.getElementById('dotted');
 
-sendForMobile.addEventListener('click', (e)=>{
+sendForMobile.addEventListener('click', async (e)=>{
     e.preventDefault();
+
+    const userUrl = resultToBeSent.value
+    let shortenedLink;
+    
+    try {
+        const response = await axios.post('/submit', {userUrl});
+
+        console.log('Resposta do servidor:', response.data);
+        console.log(response.data.link);
+        link.innerText = response.data.link;      
+        
+        console.log(link)
+
+        
+    } catch (error) {
+        console.error('erro ao enviar dados')
+    }
+
     resultForm.classList.remove('hidden')
 
     copyShareButtons[0].addEventListener('click', async (e)=>{
