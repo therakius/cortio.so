@@ -67,19 +67,17 @@ onSubmit.addEventListener('click', async (event)=>{
         
         console.log(link)
 
+        resultForm.classList.remove('hidden')
+
+        setTimeout(() => {
+            resultForm.classList.remove('hidden')
+        }, 15000);
+
         
     } catch (error) {
         console.error('erro ao enviar dados')
     }
-
-    resultForm.classList.remove('hidden')
-
-    setTimeout(() => {
-        resultForm.classList.remove('hidden')
-    }, 15000);
-
-
-    
+  
 })
 
 // copy functionalities
