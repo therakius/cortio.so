@@ -46,7 +46,7 @@ app.post('/submit', async (req, res) => {
 
   } catch (error) {
     console.error(error.response?.data || error.message);
-    res.status(500).json({ error: 'Erro ao encurtar o link' });
+    res.status(500).json({ error: 'Error while shortening the link' });
   }
 });
 

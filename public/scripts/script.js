@@ -1,32 +1,70 @@
 const toCopy = document.getElementById('copy');
+
 let link = document.getElementById('result-text');
-const feedbackLinkButton = document.getElementById('tofeedback')
+
+const feedbackLinkButton = document.getElementById('tofeedback');
+
 const feedbackForm = document.getElementById('feedback')
-const feedbackFormExit = document.querySelector('#feedback-exit')
-const onSubmit = document.getElementById('submit-btn')
+
+const feedbackFormExit = document.querySelector('#feedback-exit');
+
+const onSubmit = document.getElementById('submit-btn');
+
 const toShare = document.querySelector('#share');
+
 const popup = document.getElementById('share-popup');
+
 const exitShare = document.getElementById('exit')
+
 const resultForm = document.getElementById('result-form');
 
-const ButtonsInMain = document.querySelectorAll('#main button')
+const ButtonsInMain = document.querySelectorAll('#main button');
 
 const copyFromShare = document.getElementById('copied');
 
-const sendForMobile = document.getElementById('send-mobile')
+const sendForMobile = document.getElementById('send-mobile');
 
 const resultToBeSent = document.getElementById('user-input');
 
-let blurred = ()=>{
+const toggHamburger = document.getElementById('ham-menu')
 
-    const blurBehind = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')]
+let blurred = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')];
 
-    return blurBehind;
+//global functions
+
+async function copyFunctionality(item, button, options = {}) {
+    const copiedText = item.innerText;
+
+    try {
+        await navigator.clipboard.writeText(copiedText);
+
+        // Se foi passada alguma função de feedback visual, usa ela
+        if (typeof options.onSuccess === 'function') {
+            options.onSuccess(button);
+        } else {
+            // Estilo padrão
+            button.innerHTML = '<i class="ph ph-check-fat"></i>';
+            button.style.color = "var(--success-color)";
+            setTimeout(() => {
+                button.innerHTML = '<i class="ph ph-clipboard-text"></i>';
+                button.style.color = "black";
+            }, 3000);
+        }
+
+        console.log("link copied successfully");
+        return copiedText;
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 
+
 exitShare.addEventListener("click", function handleExitShare(){
+
     popup.classList.remove('active');
+    
     document.getElementById('footer').style.zIndex = -1;
 
     popup.addEventListener('transitionend', function handler(){
@@ -36,7 +74,9 @@ exitShare.addEventListener("click", function handleExitShare(){
 })
 
 toShare.addEventListener('click', async function handleShareFunctionality(){
+
     await navigator.clipboard.writeText(link);
+
     popup.classList.add('active');
     document.getElementById('footer').style.zIndex = -1;
 
@@ -52,10 +92,9 @@ toShare.addEventListener('click', async function handleShareFunctionality(){
 
 // submitting the long link
 
-onSubmit.addEventListener('click', async function handlerFormSubmission(event){
+onSubmit.addEventListener('click', async function handleFormSubmission(event){
     event.preventDefault()
-    const userUrl = resultToBeSent.value
-    let shortenedLink;
+    let userUrl = resultToBeSent.value;
     
     try {
         const response = await axios.post('/submit', {userUrl});
@@ -63,64 +102,49 @@ onSubmit.addEventListener('click', async function handlerFormSubmission(event){
         console.log('Resposta do servidor:', response.data);
         console.log(response.data.link);
         link.innerText = response.data.link;      
-        
-        console.log(link)
+        document.getElementById('result-text-share').innerHTML = response.data.link;
 
         resultForm.classList.remove('hidden')
 
         setTimeout(() => {
-            resultForm.classList.remove('hidden')
+            resultForm.classList.add('hidden')
         }, 15000);
 
         
     } catch (error) {
-        console.error('erro ao enviar dados')
+        console.error('erro ao enviar dados', error)
     }
   
 })
 
 // copy functionalities
 
-toCopy.addEventListener('click', async ()=>{
-   
-    try{
+toCopy.addEventListener('click',()=>{
+   copyFunctionality(link, toCopy, {onSuccess: (btn)=>{
+    btn.innerHTML = ' copied <i class="ph ph-check-fat"></i>';
+    btn.style.color = "var(--success-color)";
 
-         await navigator.clipboard.writeText(link.innerText);
-         toCopy.innerHTML = 'copied <i class="ph ph-check-fat"></i>';
-         toCopy.style.color = "var(--success-color)";
-
-         setTimeout(()=>{
-            toCopy.innerHTML = 'copy <i class="ph ph-clipboard-text"></i>'
-            toCopy.style.color = "black";
-         }, 3000)
-
-
-         console.log("link copied successfully")      
-    } catch (err) {
-        console.log(err)
-    }
+    setInterval(() => {
+        btn.innerHTML = ' copy <i class="ph ph-clipboard-text"></i>';
+        btn.style.color = "black";
+    }, 3000);
+   }})
 });
-copyFromShare.addEventListener('click', async function handleCopyFromShare(){
-    console.log("You clicked me!")
-    try{
-
-        await navigator.clipboard.writeText(link.innerText);
-        document.querySelector('.shortened > i').classList.remove('ph-clipboard-text');
-        document.querySelector('.shortened > i').classList.add('ph-check-fat');
-        copyFromShare.style.color = "var(--success-color)";
-
-        setTimeout(()=>{
-            document.querySelector('.shortened > i').classList.add('ph-clipboard-text');
-            document.querySelector('.shortened > i').classList.remove('ph-check-fat');
-           copyFromShare.style.color = "black";
-        }, 3000)
 
 
-        console.log("link copied successfully")      
-   } catch (err) {
-       console.log(err)
-   }
-})
+copyFromShare.addEventListener('click', () => {
+    copyFunctionality(link, copyFromShare, {
+        onSuccess: (btn) => {
+            btn.innerHTML = '<i class="ph ph-check-fat"></i>';
+            btn.style.color = "var(--success-color)";
+            setTimeout(() => {
+                btn.innerHTML = '<i class="ph ph-clipboard-text"></i>';
+                btn.style.color = "black";
+            }, 3000);
+        }
+    });
+});
+
 
 // displaying feedback form popup
 feedbackLinkButton.addEventListener('click', function handleFeedbackFormPopup(event){
@@ -137,7 +161,7 @@ feedbackLinkButton.addEventListener('click', function handleFeedbackFormPopup(ev
         popup.classList.remove('active')
     }
 
-    blurred().forEach(item => {
+    blurred.forEach(item => {
         item.classList.add('blurred')
         item.style.cursor = 'auto'
     })
@@ -156,11 +180,11 @@ feedbackFormExit.addEventListener('click', function handleFeedbackformExit(){
     feedbackForm.classList.add('inactive')
     feedbackLinkButton.style.color = 'black';
 
-    blurred().forEach(item => {
+   blurred.forEach(item => {
         item.classList.remove('blurred')
     })
 
-    blurred().forEach(item => {
+   blurred.forEach(item => {
         item.classList.remove('blurred')
         item.style.cursor = 'auto'
     })
@@ -178,7 +202,6 @@ feedbackFormExit.addEventListener('click', function handleFeedbackformExit(){
 
 
 // function to return object with links to the apps
-
 function linksToApp(){
 
     const shareTo = {
@@ -218,20 +241,18 @@ document.getElementById('socials').addEventListener('click', (e)=>{
     }, 800);
    
 
-    console.log(linksToApp()[social])
+    console.log(linksToApp()[social]);
 
 })
 
 //mobile interactions
 
 const copyShareButtons = [document.getElementById('copy-mobile'), document.getElementById('share-mobile')]
-const toggHamburger = document.getElementById('dotted');
 
 sendForMobile.addEventListener('click', async (e)=>{
     e.preventDefault();
 
     const userUrl = resultToBeSent.value
-    let shortenedLink;
     
     try {
         const response = await axios.post('/submit', {userUrl});
@@ -241,42 +262,20 @@ sendForMobile.addEventListener('click', async (e)=>{
         link.innerText = response.data.link;      
         
         console.log(link)
+        resultForm.classList.remove('hidden');
 
-        
-    } catch (error) {
-        console.error('erro ao enviar dados')
-    }
+        copyShareButtons.forEach(item => item.classList.remove('hidden'));
 
-    resultForm.classList.remove('hidden')
-
-    copyShareButtons[0].addEventListener('click', async (e)=>{
-        try{
-
-            await navigator.clipboard.writeText(link);
-            copyShareButtons[0].innerHTML = '<i class="ph ph-check-fat"></i>';
-            copyShareButtons[0].style.color = "var(--success-color)";
-   
-            setTimeout(()=>{
-                copyShareButtons[0].innerHTML= '<i class="ph ph-clipboard-text"></i>'
-               copyShareButtons[0].style.color = "black";
-            }, 3000)
-   
-   
-            console.log("link copied successfully")      
-       } catch (err) {
-           console.log(err)
-       }
-    })
         setTimeout(() => {
 
             copyShareButtons[0].classList.remove('hidden')
         }, 800);
-
+    
         setTimeout(() => {
             copyShareButtons[1].classList.remove('hidden')
-
+    
         }, 500);
-
+    
         setTimeout(() => {
             copyShareButtons[0].classList.add('hidden');
         
@@ -289,9 +288,29 @@ sendForMobile.addEventListener('click', async (e)=>{
         
             }, 1000); // 1s depois do botão 0 sumir
         
-        }, 15000); // Espera inicial de 15s        
+        }, 15000); // Espera inicial de 15s  
 
+    } catch (error) {
+        console.error('erro ao enviar dados')
+    }
+
+   
 })
+
+copyShareButtons[0].addEventListener('click', async (e)=>{
+
+    copyFunctionality(link, copyShareButtons[0], {
+        onSuccess : (btn)=>{
+            btn.innerHTML = '<i class="ph ph-check-fat"></i>';
+            btn.style.color = "var(--success-color)";
+            setTimeout(() => {
+                btn.innerHTML = '<i class="ph ph-clipboard-text"></i>';
+                btn.style.color = "black";
+            }, 3000);
+        }
+    });
+})
+     
 
 toggHamburger.addEventListener('click', (e)=>{
     toggHamburger.classList.toggle('ph-x')
@@ -303,7 +322,6 @@ toggHamburger.addEventListener('click', (e)=>{
     }
 
 } )
-
 
 feedbackLinkButton.addEventListener('click', (e)=>{
     if(toggHamburger.classList.contains('ph-x')) {

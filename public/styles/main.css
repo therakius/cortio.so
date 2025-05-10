@@ -137,6 +137,7 @@ header nav {
     flex-direction: column;
     height: 80%;
     width: 100%;
+    overflow-y: hidden;
 }
 
 #feedback-form .name-email {
@@ -320,7 +321,7 @@ footer a:hover {
     scale: 1.5;
 }
 
-#dotted, .button-mobile, #send-button-conteiner{
+#hammenu, .button-mobile, #send-button-conteiner{
     display: none;
 }
 
@@ -370,7 +371,7 @@ footer a:hover {
         display: block;
     }
 
-    #dotted {
+    #hammenu {
         display: block;
         font-size: 2rem;
         font-weight: 500;
@@ -523,5 +524,9 @@ footer a:hover {
 }
 
 .result-shortened > #clipboard-mobile {
+    display: none;
+}
+
+#ham-menu{
     display: none;
 }
