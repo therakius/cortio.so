@@ -239,6 +239,10 @@ document.getElementById('socials').addEventListener('click', (e)=>{
         window.open(linksToApp()[social], "_blank")
          }
     }, 800);
+
+    popup.addEventListener('transitionend', function handler(){
+        document.getElementById('footer').style.zIndex = 'auto';
+    })
    
 
     console.log(linksToApp()[social]);
