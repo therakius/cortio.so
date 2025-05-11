@@ -527,3 +527,8 @@ footer a:hover {
     display: none;
 }
 
+#submit-btn:hover{
+    transition: .3s ease-in-out;
+    scale: 1.2;
+    color: var(--success-color);
+}

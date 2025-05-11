@@ -94,8 +94,8 @@ toShare.addEventListener('click', async function handleShareFunctionality(){
 
 onSubmit.addEventListener('click', async function handleFormSubmission(event){
     event.preventDefault()
+    onSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>'
     let userUrl = resultToBeSent.value;
-    
     try {
         const response = await axios.post('/submit', {userUrl});
 
@@ -104,7 +104,12 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
         link.innerText = response.data.link;      
         document.getElementById('result-text-share').innerHTML = response.data.link;
 
-        resultForm.classList.remove('hidden')
+        onSubmit.innerHTML = '<i class="ph ph-check-fat" style="color: var(--success-color);"></i>'
+        setTimeout(() => {
+            onSubmit.innerHTML = '<i class="ph ph-paper-plane-tilt"></i>';
+        }, 3000);
+        
+        resultForm.classList.remove('hidden');
 
         setTimeout(() => {
             resultForm.classList.add('hidden')
@@ -112,6 +117,19 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
 
         
     } catch (error) {
+        if (resultToBeSent.value === '') {
+            
+            onSubmit.innerHTML = '<i class="fa-solid fa-triangle-exclamation fa-beat-fade" style="color: var(--error-color);"></i>';
+            resultToBeSent.placeholder = 'Link field must not be empty';
+
+            setTimeout(() => {
+                onSubmit.innerHTML = '<i class="ph ph-paper-plane-tilt"></i>';
+                resultToBeSent.placeholder = 'paste your link here';
+
+            }, 3000);
+            throw new Error("Link must not be empty")
+        }
+        
         console.error('erro ao enviar dados', error)
     }
   
