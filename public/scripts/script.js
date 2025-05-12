@@ -30,6 +30,8 @@ const toggHamburger = document.getElementById('ham-menu')
 
 let blurred = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')];
 
+let message = ''
+
 //global functions
 
 async function copyFunctionality(item, button, options = {}) {
@@ -57,6 +59,19 @@ async function copyFunctionality(item, button, options = {}) {
     } catch (err) {
         console.log(err);
     }
+}
+
+const FeedbackErrorMessage = (message, clickedButton, messageContainer)=>{
+
+    clickedButton.innerHTML = '<i class="fa-solid fa-triangle-exclamation fa-beat-fade" style="color: var(--error-color);"></i>';
+    messageContainer.placeholder = message;
+
+    setTimeout(() => {
+        clickedButton.innerHTML = '<i class="ph ph-paper-plane-tilt"></i>';
+        messageContainer.placeholder = 'paste your link here ...';
+
+    }, 5000);
+
 }
 
 
@@ -110,6 +125,7 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
         }, 3000);
         
         resultForm.classList.remove('hidden');
+        resultToBeSent.value = ''
 
         setTimeout(() => {
             resultForm.classList.add('hidden')
@@ -117,17 +133,27 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
 
         
     } catch (error) {
+
         if (resultToBeSent.value === '') {
+            message = 'Link field must not be empty';
+
+            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
+
+            throw new Error("Link must not be empty");
             
-            onSubmit.innerHTML = '<i class="fa-solid fa-triangle-exclamation fa-beat-fade" style="color: var(--error-color);"></i>';
-            resultToBeSent.placeholder = 'Link field must not be empty';
+        } else if (error.response && error.response.status  === 500) {
+            resultToBeSent.value = '';
+            message = 'Internal error. check your connection or try again later';
 
-            setTimeout(() => {
-                onSubmit.innerHTML = '<i class="ph ph-paper-plane-tilt"></i>';
-                resultToBeSent.placeholder = 'paste your link here';
+            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
+            resultToBeSent.value = '';
+            throw new Error("An Internal error occured. try again later");
 
-            }, 3000);
-            throw new Error("Link must not be empty")
+        } else if(err.response && error.response.status === 503){
+            resultToBeSent.value = '';
+            message = 'service unavailable. check your connection or try again later';
+            FeedbackErrorMessage(message, onsubmit, resultToBeSent)
+            throw new Error("service unavailale");
         }
         
         console.error('erro ao enviar dados', error)
@@ -274,6 +300,8 @@ const copyShareButtons = [document.getElementById('copy-mobile'), document.getEl
 sendForMobile.addEventListener('click', async (e)=>{
     e.preventDefault();
 
+    onSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+
     const userUrl = resultToBeSent.value
     
     try {
@@ -313,10 +341,32 @@ sendForMobile.addEventListener('click', async (e)=>{
         }, 15000); // Espera inicial de 15s  
 
     } catch (error) {
-        console.error('erro ao enviar dados')
+
+        if (resultToBeSent.value === '') {
+            message = 'Link field must not be empty';
+
+            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
+
+            throw new Error("Link must not be empty");
+            
+        } else if (error.response && error.response.status  === 500) {
+            resultToBeSent.value = '';
+            message = 'check your connection or try again later';
+
+            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
+
+            throw new Error("An Internal error occured. try again later");
+
+        } else if(err.response && error.response.status === 503){
+            resultToBeSent.value = '';
+            message = 'service unavailable. Try again later';
+            FeedbackErrorMessage(message, onsubmit, resultToBeSent)
+            throw new Error("service unavailale");
+        }
+        
+        console.error('erro ao enviar dados', error)
     }
 
-   
 })
 
 copyShareButtons[0].addEventListener('click', async (e)=>{
