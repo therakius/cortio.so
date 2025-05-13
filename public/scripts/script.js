@@ -125,11 +125,14 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
         }, 3000);
         
         resultForm.classList.remove('hidden');
-        resultToBeSent.value = ''
 
         setTimeout(() => {
             resultForm.classList.add('hidden')
         }, 15000);
+
+        setTimeout(() => {
+            resultToBeSent.value = ''
+        }, 16000);
 
         
     } catch (error) {
