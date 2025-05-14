@@ -385,7 +385,10 @@ footer a:hover {
     }
 
     body {
-        display: block;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
     }
 
     #ham-menu {
