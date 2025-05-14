@@ -99,7 +99,12 @@
             </div>
 
 
-            <input type="text" placeholder="subject*" name="subject" required>
+            <select name="subject" id="subject">
+                <option value="not specified" selected disabled>Choose your subject *</option>
+                <option value="Bug report">Bug report</option>
+                <option value="UX/UI improvements">UX/UI improvements</option>
+                <option value="Other">Other</option>
+            </select>
 
             <textarea name="message" id="message" placeholder="message*" name="message" required></textarea>
 

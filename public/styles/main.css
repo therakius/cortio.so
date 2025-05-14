@@ -116,7 +116,7 @@ header nav {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: rgb(228, 222, 222);
+    background-color: #e4dede;
     height: 35vh;
     width: 35%;
     place-self: center;
@@ -166,6 +166,23 @@ header nav {
     border-bottom: 1px solid black;
     outline: none;
 }
+
+#feedback-form select{
+    width: 45%;
+    margin-top: 30px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none; /* Safari/Chrome */
+    -moz-appearance: none; /* Firefox */
+}
+
+#feedback-form select option {
+    background-color: #e4dede;
+}
+
 
 #feedback-form #send {
     position: absolute;
@@ -498,7 +515,7 @@ footer a:hover {
         height: 15vh;
     }
 
-    #feedback-form input {
+    #feedback-form input, #feedback-form select {
         width: 100%;
     }
 
