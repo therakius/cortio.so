@@ -6,6 +6,8 @@ import { dirname } from 'path';
 import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config(); 
+import feedbackRoute from './feedback.js';
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +21,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static("public"));
 app.set("view engine", "html");
 app.use(express.json());
+
+app.use('/', feedbackRoute);
 
 app.get('/', async (req, res)=>{
     res.sendFile(__dirname+ '/views/index.html')

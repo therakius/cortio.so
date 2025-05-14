@@ -19,6 +19,7 @@
 
     <script defer src="/scripts/script.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="/scripts/sendFeedback.js" type="module" ></script>
 
 
     <link rel="shortcut icon" href="/images/link.svg" type="image/x-icon" style="color: white;">
@@ -93,14 +94,14 @@
             </h2>
 
             <div class="name-email">
-                <input type="text" placeholder="name*" name="name" required>
+                <input type="text" placeholder="name*" name="full_name" id="full_name" required>
 
-                <input type="email" placeholder="email*" name="email" required>
+                <input type="email" placeholder="email*" name="email" id="email" required>
             </div>
 
 
             <select name="subject" id="subject">
-                <option value="not specified" selected disabled>Choose your subject *</option>
+                <option value="" selected disabled>Choose your subject *</option>
                 <option value="Bug report">Bug report</option>
                 <option value="UX/UI improvements">UX/UI improvements</option>
                 <option value="Other">Other</option>
