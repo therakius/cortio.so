@@ -33,7 +33,7 @@ router.post('/feedback', async (req, res)=>{
                 subject : `Your feedback has been received!`,
                 html: `
                 <h2>Thank you for your feedback!</h2>
-                <p>Hi, ${req.body.full_name}!</p>
+                <p>Hi, ${req.body.name}!</p>
                 <p>We’ve received your feedback with the subject <b>${req.body.subject}</b> and it will be taken into consideration for future updates to the app.</p>
                 <p>Your input is invaluable to us, and we’re always working to improve the user experience.</p>
                 <p>Best regards, <br> The Syntaxis Team</p>
