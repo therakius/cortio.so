@@ -253,10 +253,10 @@ function linksToApp(){
 
     const shareTo = {
         text: encodeURIComponent("Check this out - it might be usefull for you"),
-        link: encodeURIComponent(link)
+        link: encodeURIComponent(link.innerText)
     }
 
-    const body = encodeURIComponent(`Check this out – it might be useful for you: ${link}`);
+    const body = `Check this out! it might be useful for you: ${encodeURIComponent(link.innerText)}`;
 
 
     const socials = {
@@ -418,6 +418,3 @@ if (document.documentElement.clientWidth < 600) {
     console.log(`your screen is ${document.documentElement.clientWidth}px wide`)
 
 }
-
-
-
