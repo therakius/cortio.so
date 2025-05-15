@@ -411,7 +411,7 @@ copyShareButtons[1].addEventListener('click', async (e)=>{
     const shareData = {
         title: "Cortio-so",
         text: "Share your URLs fast and easy!",
-        url: encodeURIComponent(encodeURIComponent(link.innerText)),
+        url: encodeURIComponent(link.innerText),
       };
 
       try {
