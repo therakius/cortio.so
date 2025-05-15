@@ -406,7 +406,21 @@ copyShareButtons[0].addEventListener('click', async (e)=>{
         }
     });
 })
-     
+
+copyShareButtons[1].addEventListener('click', async (e)=>{
+    const shareData = {
+        title: "Cortio-so",
+        text: "Share your URLs fast and easy!",
+        url: encodeURIComponent(),
+      };
+
+      try {
+        await navigator.share(encodeURIComponent(link.innerText));
+        resultPara.textContent = "MDN shared successfully";
+      } catch (err) {
+        resultPara.textContent = `Error: ${err}`;
+      }
+})
 
 toggHamburger.addEventListener('click', (e)=>{
     toggHamburger.classList.toggle('ph-x')
