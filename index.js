@@ -49,9 +49,39 @@ app.post('/submit', async (req, res) => {
     res.json( {link: shortenedLink});
 
   } catch (error) {
-    console.error(error.response?.data || error.message);
-    res.status(500).json({ error: 'Error while shortening the link' });
+    console.error(error); // Mantenha no log do servidor apenas
+  
+    // Caso 1: resposta HTTP 422
+    if (error.response?.status === 422) {
+      return res.status(422).json({
+        errorCode: 'INVALID_URL',
+        message: 'Please enter a valid url.'
+      });
+    }
+  
+    // Caso 2: serviço remoto retornou HTTP 503
+    if (error.response?.status === 503) {
+      return res.status(503).json({
+        errorCode: 'SERVICE_UNAVAILABLE',
+        message: 'Service unavailable. check your connection or try again later.'
+      });
+    }
+  
+    // Caso 3: erro de rede/baixo nível — sem resposta do servidor
+    if (error.code === 'ESOCKET' || error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+      return res.status(503).json({
+        errorCode: 'NETWORK_ERROR',
+        message: 'Trouble connecting. check your connection or try again later.'
+      });
+    }
+  
+    // Fallback: erro interno inesperado
+    return res.status(500).json({
+      errorCode: 'INTERNAL_ERROR',
+      message: 'an error occured. check your connection or try again later'
+    });
   }
+  
 });
 
 

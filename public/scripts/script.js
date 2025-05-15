@@ -133,33 +133,40 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
         setTimeout(() => {
             resultToBeSent.value = ''
         }, 16000);
+    
 
-        
     } catch (error) {
-
-        if (resultToBeSent.value === '') {
+        const inputEmpty = resultToBeSent.value === '';
+        let message = '';
+    
+        if (inputEmpty) {
             message = 'Link field must not be empty';
-
             FeedbackErrorMessage(message, onSubmit, resultToBeSent);
-
-            throw new Error("Link must not be empty");
-            
-        } else if (error.response && error.response.status  === 500) {
-            resultToBeSent.value = '';
-            message = 'Internal error. check your connection or try again later';
-
-            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
-            resultToBeSent.value = '';
-            throw new Error("An Internal error occured. try again later");
-
-        } else if(err.response && error.response.status === 503){
-            resultToBeSent.value = '';
-            message = 'service unavailable. check your connection or try again later';
-            FeedbackErrorMessage(message, onsubmit, resultToBeSent)
-            throw new Error("service unavailale");
+            throw new Error(message);
         }
-        
-        console.error('erro ao enviar dados', error)
+    
+        const errorCode = error?.response?.data?.errorCode;
+    
+        switch (errorCode) {
+            case 'SERVICE_UNAVAILABLE':
+                message = 'Service unavailable. Try again later.';
+                break;
+    
+            case 'INVALID_URL':
+                message = 'Please enter a valid URL';
+                break;
+    
+            case 'INTERNAL_ERROR':
+                message = 'Internal error. check your connection or try again.';
+                break;
+    
+            default:
+                message = 'Unexpected error. check your connection or try again.';
+        }
+    
+        FeedbackErrorMessage(message, onSubmit, resultToBeSent);
+        resultToBeSent.value = '';
+        throw new Error(message);
     }
   
 })
@@ -310,11 +317,8 @@ sendForMobile.addEventListener('click', async (e)=>{
     try {
         const response = await axios.post('/submit', {userUrl});
 
-        console.log('Resposta do servidor:', response.data);
-        console.log(response.data.link);
         link.innerText = response.data.link;      
         
-        console.log(link)
         resultForm.classList.remove('hidden');
 
         copyShareButtons.forEach(item => item.classList.remove('hidden'));
@@ -345,31 +349,38 @@ sendForMobile.addEventListener('click', async (e)=>{
 
     } catch (error) {
 
-        if (resultToBeSent.value === '') {
+        const inputEmpty = resultToBeSent.value === '';
+        let message = '';
+    
+        if (inputEmpty) {
             message = 'Link field must not be empty';
-
             FeedbackErrorMessage(message, onSubmit, resultToBeSent);
-
-            throw new Error("Link must not be empty");
-            
-        } else if (error.response && error.response.status  === 500) {
-            resultToBeSent.value = '';
-            message = 'check your connection or try again later';
-
-            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
-
-            throw new Error("An Internal error occured. try again later");
-
-        } else if(err.response && error.response.status === 503){
-            resultToBeSent.value = '';
-            message = 'service unavailable. Try again later';
-            FeedbackErrorMessage(message, onsubmit, resultToBeSent)
-            throw new Error("service unavailale");
+            throw new Error(message);
         }
-        
-        console.error('erro ao enviar dados', error)
+    
+        const errorCode = error?.response?.data?.errorCode;
+    
+        switch (errorCode) {
+            case 'SERVICE_UNAVAILABLE':
+                message = 'Service unavailable. Try again later.';
+                break;
+    
+            case 'INVALID_URL':
+                message = 'Please enter a valid URL';
+                break;
+    
+            case 'INTERNAL_ERROR':
+                message = 'check your connection or try again later';
+                break;
+    
+            default:
+                message = 'Unexpected error. check your connection and try again.';
+        }
+    
+        FeedbackErrorMessage(message, onSubmit, resultToBeSent);
+        resultToBeSent.value = '';
+        throw new Error(message);
     }
-
 })
 
 copyShareButtons[0].addEventListener('click', async (e)=>{
