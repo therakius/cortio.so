@@ -352,6 +352,11 @@ sendForMobile.addEventListener('click', async (e)=>{
         
         }, 15000); // Espera inicial de 15s  
 
+
+        setTimeout(() => {
+            resultToBeSent.value = ''
+        }, 16000);
+
     } catch (error) {
 
         const inputEmpty = resultToBeSent.value === '';
