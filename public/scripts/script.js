@@ -415,7 +415,7 @@ copyShareButtons[1].addEventListener('click', async (e)=>{
       };
 
       try {
-        await navigator.share(encodeURIComponent(link.innerText));
+        await navigator.share(shareData);
         // resultPara.textContent = "MDN shared successfully";
       } catch (err) {
         console.error(err);
