@@ -413,6 +413,10 @@ footer a:hover {
         top: 35%;
     }
 
+    #main > form {
+        gap: 10px;
+    }
+
     #main > form, #main  #result-form {
         width: 90%;
         height: 3rem;
