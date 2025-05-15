@@ -321,6 +321,11 @@ sendForMobile.addEventListener('click', async (e)=>{
         
         resultForm.classList.remove('hidden');
 
+        onSubmit.innerHTML = '<i class="ph ph-check-fat" style="color: var(--success-color);"></i>'
+        setTimeout(() => {
+            onSubmit.innerHTML = '<i class="ph ph-paper-plane-tilt"></i>';
+        }, 3000);
+
         copyShareButtons.forEach(item => item.classList.remove('hidden'));
 
         setTimeout(() => {
