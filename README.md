@@ -74,9 +74,4 @@ This project is currently closed source and all rights are reserved by the autho
 
 ---
 
-## 📞 Contact
-
-If you have any questions or feedback regarding Cortio.so, feel free to reach out:
-
-* **Your Name/GitHub Profile:** [Your GitHub Username](https://github.com/YourGitHubUsername)
-* **Project Email (Optional):** your.project.email@example.com
+<p align="center">Made with ❤️ by <a href="https://github.com/gasparc-101"> Gasparc-101</a></p>
