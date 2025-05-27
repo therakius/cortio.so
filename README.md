@@ -37,7 +37,6 @@ Cortio.so is built using a robust and popular web development stack, aligning wi
     * Nodemailer with Gmail
     * Google Sheets API (for storing feedback)
 
----
 
 ## 💡 Usage
 
