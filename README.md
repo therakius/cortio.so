@@ -1,10 +1,10 @@
-# Cortio.so - Your Fast and Feature-Rich URL Shortener
+# Cortio.so
 
 ## Overview
 
-Cortio.so is a modern, responsive URL shortener built for simplicity and efficiency. It leverages the TinyURL API to provide quick link shortening, along with convenient features for copying and sharing your shortened URLs across social media platforms.
+Cortio.so is a responsive URL shortener built for simplicity and efficiency. It leverages the TinyURL API to provide quick link shortening, along with convenient features for copying and sharing your shortened URLs across social media platforms.
 
-Beyond its core shortening functionality, Cortio.so includes a robust user feedback system. Users can easily share their thoughts via a dedicated form, receiving an automated email notification upon submission. For the project owner, every feedback entry is securely stored in a Google Sheet, and you receive real-time email notifications for each new submission.
+Beyond its core shortening functionality, Cortio.so includes a robust user feedback system. Users can easily share their thoughts via a dedicated form, receiving an automated email notification upon submission. 
 
 ## ✨ Features
 
