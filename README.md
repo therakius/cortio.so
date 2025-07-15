@@ -73,4 +73,4 @@ This project is currently closed source and all rights are reserved by the autho
 
 ---
 
-<p align="center">Made with ❤️ by <a href="https://github.com/gasparc-101"> Gasparc-101</a></p>
+<p align="center">Made with ❤️ by <a href="https://github.com/therakius">therakius.</a></p>
