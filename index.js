@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 
 dotenv.config(); 
-import feedbackRoute from './feedback.js';
+import feedbackRoute from "./src/routes/feedback.route.js"
 
 
 
@@ -25,7 +25,7 @@ app.set("view engine", "html");
 app.use(express.json());
 app.use(morgan('dev'))
 
-app.use('/', feedbackRoute);
+app.use("/feedback", feedbackRoute)
 
 app.get('/', async (req, res)=>{
     res.sendFile(__dirname+ '/views/index.html')

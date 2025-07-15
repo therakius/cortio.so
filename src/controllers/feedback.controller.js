@@ -1,19 +1,9 @@
-import express from 'express';
-import nodemailer from 'nodemailer'
-import dotenv from 'dotenv'
-dotenv.config()
+import nodemailer from "nodemailer";
+import { server_email_pass, server_email } from "../credentials/server.data.js";
 
-const server_email = process.env.EMAIL_ADDRESS;
-const server_email_pass = process.env.EMAIL_PASSWORD;
-
-const router = express.Router();
-import bodyParser from 'body-parser';
-
-router.use(bodyParser.urlencoded({extended: true}));
-
-router.post('/feedback', async (req, res)=>{
-    let feedbackMessage = req.body
-    console.log(feedbackMessage)
+export async function sendFeedback(req, res) {
+    const {name, email, subject, message} = req.body;
+    console.log(name, email, subject, message)
     try {
 
         const transporter = nodemailer.createTransport({
@@ -29,12 +19,12 @@ router.post('/feedback', async (req, res)=>{
         async function main() {
             const info = await transporter.sendMail({
                 from : `"Gaspar, from Syntaxis" <${server_email}>`,
-                to: req.body.email,
+                to: email,
                 subject : `Your feedback has been received!`,
                 html: `
                 <h2>Thank you for your feedback!</h2>
-                <p>Hi, ${req.body.name}!</p>
-                <p>We’ve received your feedback with the subject <b>${req.body.subject}</b> and it will be taken into consideration for future updates to the app.</p>
+                <p>Hi, ${name}!</p>
+                <p>We’ve received your feedback with the subject <b>${subject}</b> and it will be taken into consideration for future updates to the app.</p>
                 <p>Your input is invaluable to us, and we’re always working to improve the user experience.</p>
                 <p>Best regards, <br> The Syntaxis Team</p>
 
@@ -45,10 +35,10 @@ router.post('/feedback', async (req, res)=>{
          // sending data to google forms
 
             const formData = new URLSearchParams();
-            formData.append('entry.1122704515', req.body.name)
-            formData.append('entry.2090161290', req.body.email)
-            formData.append('entry.840222182', req.body.subject)
-            formData.append('entry.2100339726', req.body.message)            
+            formData.append('entry.1122704515', name)
+            formData.append('entry.2090161290', email)
+            formData.append('entry.840222182', subject)
+            formData.append('entry.2100339726', message)            
 
             const googleFormURL = process.env.GOOGLE_FORMS_URL;
 
@@ -75,10 +65,4 @@ router.post('/feedback', async (req, res)=>{
         res.json({error: error})
     }
 
-
-  
-})
-
-
-
-export default router;
+}
