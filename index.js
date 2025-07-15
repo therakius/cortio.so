@@ -13,7 +13,7 @@ import shortenRoute from "./src/routes/shorten.route.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-export const app = express();
+const app = express();
 const port = 3000;
 
 app.use(bodyParser.urlencoded({extended: true}));
