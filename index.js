@@ -41,6 +41,7 @@ const config = {
 };
 
 app.post('/submit', async (req, res) => {
+  console.log(req.body)
   const userUrl = req.body.userUrl;
 
   try {
@@ -52,7 +53,7 @@ app.post('/submit', async (req, res) => {
     res.json( {link: shortenedLink});
 
   } catch (error) {
-    console.error(`error: ${error.code}`); // Mantenha no log do servidor apenas
+    console.error(`error: ${error.code} | ${error.message}`); // Mantenha no log do servidor apenas
   
     // Caso 1: resposta HTTP 422
     if (error.response?.status === 422) {
@@ -71,12 +72,13 @@ app.post('/submit', async (req, res) => {
     }
   
     // Caso 3: erro de rede/baixo nível — sem resposta do servidor
-    if (error.code === 'ESOCKET' || error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+    if (error.code === 'ESOCKET' || error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND' || errorCode === 'ETIMEDOUT') {
       return res.status(503).json({
         errorCode: 'NETWORK_ERROR',
         message: 'Trouble connecting. check your connection or try again later.'
       });
     }
+
   
     // Fallback: erro interno inesperado
     return res.status(500).json({
