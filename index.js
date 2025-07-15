@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
+
 dotenv.config(); 
 import feedbackRoute from './feedback.js';
 
@@ -21,6 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static("public"));
 app.set("view engine", "html");
 app.use(express.json());
+app.use(morgan('dev'))
 
 app.use('/', feedbackRoute);
 
@@ -44,12 +47,12 @@ app.post('/submit', async (req, res) => {
     const response = await axios.post(link, { url: userUrl }, config);
     
     const shortenedLink = response.data.data.tiny_url;
-    console.log(response.data);
+    console.log(shortenedLink);
 
     res.json( {link: shortenedLink});
 
   } catch (error) {
-    console.error(error); // Mantenha no log do servidor apenas
+    console.error(`error: ${error.code}`); // Mantenha no log do servidor apenas
   
     // Caso 1: resposta HTTP 422
     if (error.response?.status === 422) {
