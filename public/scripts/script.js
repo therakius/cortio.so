@@ -90,7 +90,7 @@ exitShare.addEventListener("click", function handleExitShare(){
 
 toShare.addEventListener('click', async function handleShareFunctionality(){
 
-    await navigator.clipboard.writeText(link);
+    await navigator.clipboard.writeText(link.innerText);
 
     popup.classList.add('active');
     document.getElementById('footer').style.zIndex = -1;
@@ -159,6 +159,10 @@ onSubmit.addEventListener('click', async function handleFormSubmission(event){
             case 'INTERNAL_ERROR':
                 message = 'Internal error. check your connection or try again.';
                 break;
+
+            case'ETIMEDOUT':
+                message = 'Trouble connecting. check your connection or try again later.'
+                break
     
             default:
                 message = 'Unexpected error. check your connection or try again.';
