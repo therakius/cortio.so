@@ -4,7 +4,8 @@ let link = document.getElementById('result-text');
 
 const feedbackLinkButton = document.getElementById('tofeedback');
 
-const feedbackForm = document.getElementById('feedback')
+export const feedbackFormDiv = document.getElementById('feedback')
+export const feedbackForm = document.getElementById('feedback-form')
 
 const feedbackFormExit = document.querySelector('#feedback-exit');
 
@@ -18,7 +19,7 @@ const exitShare = document.getElementById('exit')
 
 const resultForm = document.getElementById('result-form');
 
-const ButtonsInMain = document.querySelectorAll('#main button');
+export const ButtonsInMain = document.querySelectorAll('#main button');
 
 const copyFromShare = document.getElementById('copied');
 
@@ -28,7 +29,7 @@ const resultToBeSent = document.getElementById('user-input');
 
 const toggHamburger = document.getElementById('ham-menu')
 
-let blurred = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')];
+export let blurred = [resultForm, document.getElementById('input-form'), document.getElementById('title-form')];
 
 let message = ''
 
@@ -96,7 +97,7 @@ toShare.addEventListener('click', async function handleShareFunctionality(){
     document.getElementById('footer').style.zIndex = -1;
 
     if(!feedbackLinkButton.classList.contains('inactive')){
-        feedbackForm.classList.add('inactive')
+        feedbackFormDiv.classList.add('inactive')
     }
 
     popup.addEventListener('transitionend', ()=>{
@@ -212,7 +213,7 @@ feedbackLinkButton.addEventListener('click', function handleFeedbackFormPopup(ev
         document.getElementById('footer').style.zIndex = 'auto';
     })
     
-    feedbackForm.classList.remove('inactive')
+    feedbackFormDiv.classList.remove('inactive')
     feedbackLinkButton.style.color = 'var(--primary-color)'
 
     if(popup.classList.contains('active')){
@@ -235,7 +236,7 @@ feedbackLinkButton.addEventListener('click', function handleFeedbackFormPopup(ev
 })
 
 feedbackFormExit.addEventListener('click', function handleFeedbackformExit(){
-    feedbackForm.classList.add('inactive')
+    feedbackFormDiv.classList.add('inactive')
     feedbackLinkButton.style.color = 'black';
 
    blurred.forEach(item => {

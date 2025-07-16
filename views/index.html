@@ -100,8 +100,8 @@
             </div>
 
 
-            <select name="subject" id="subject">
-                <option value="" selected disabled>Choose your subject *</option>
+            <select name="subject" id="subject" required>
+                <option value="" selected disabled>Subject *</option>
                 <option value="Bug report">Bug report</option>
                 <option value="UX/UI improvements">UX/UI improvements</option>
                 <option value="Other">Other</option>
@@ -110,7 +110,7 @@
             <textarea name="message" id="message" placeholder="message*" name="message" required></textarea>
 
             <div class="centered-button">
-                <button id="send">Send</button>
+                <button id="send" type="submit"><i class="ph ph-paper-plane-tilt"></i></button>
             </div>
             
         </form>

@@ -62,7 +62,7 @@ export async function sendFeedback(req, res) {
 
     } catch (error) {
         console.error('an error occured', error)
-        res.json({error: error})
+        return res.status(500).json({ error: 'Falha ao enviar email.' });
     }
 
 }
