@@ -519,6 +519,7 @@ footer a:hover {
         gap: 15px;
         display: flex;
         padding-top: 40px;
+        overflow: auto;
     }
     #feedback-form .name-email{
         flex-direction: column;
