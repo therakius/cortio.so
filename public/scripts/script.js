@@ -455,7 +455,7 @@ if (document.documentElement.clientWidth < 600) {
     buttonC.style.color= 'black'
 
     const buttonS = document.getElementById('submit-btn')
-    buttonS.disabled = true;
+    buttonS.disabled = false;
     buttonS.style.color = 'black'
     console.log(`your screen is ${document.documentElement.clientWidth}px wide`)
 
