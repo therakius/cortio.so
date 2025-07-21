@@ -110,7 +110,10 @@ toShare.addEventListener('click', async function handleShareFunctionality(){
 
 onSubmit.addEventListener('click', async function handleFormSubmission(event){
     event.preventDefault()
-    input.blur();
+    if(document.activeElement){
+        document.activeElement.blur();
+    }
+    
     onSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>'
     let userUrl = resultToBeSent.value;
     try {
