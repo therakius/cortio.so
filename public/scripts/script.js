@@ -1,6 +1,6 @@
 const toCopy = document.getElementById('copy');
 
-let link = document.getElementById('result-text');
+export let link = document.getElementById('result-text');
 
 const feedbackLinkButton = document.getElementById('tofeedback');
 
@@ -9,7 +9,7 @@ export const feedbackForm = document.getElementById('feedback-form')
 
 const feedbackFormExit = document.querySelector('#feedback-exit');
 
-const onSubmit = document.getElementById('submit-btn');
+export const onSubmit = document.getElementById('submit-btn');
 
 const toShare = document.querySelector('#share');
 
@@ -17,7 +17,7 @@ const popup = document.getElementById('share-popup');
 
 const exitShare = document.getElementById('exit')
 
-const resultForm = document.getElementById('result-form');
+export const resultForm = document.getElementById('result-form');
 
 export const ButtonsInMain = document.querySelectorAll('#main button');
 
@@ -25,7 +25,7 @@ const copyFromShare = document.getElementById('copied');
 
 const sendForMobile = document.getElementById('send-mobile');
 
-const resultToBeSent = document.getElementById('user-input');
+export const resultToBeSent = document.getElementById('user-input');
 
 const toggHamburger = document.getElementById('ham-menu')
 
@@ -62,7 +62,7 @@ async function copyFunctionality(item, button, options = {}) {
     }
 }
 
-const FeedbackErrorMessage = (message, clickedButton, messageContainer)=>{
+export const FeedbackErrorMessage = (message, clickedButton, messageContainer)=>{
 
     clickedButton.innerHTML = '<i class="fa-solid fa-triangle-exclamation fa-beat-fade" style="color: var(--error-color);"></i>';
     messageContainer.placeholder = message;
@@ -107,79 +107,8 @@ toShare.addEventListener('click', async function handleShareFunctionality(){
 })
 
 // submitting the long link
-
-onSubmit.addEventListener('click', async function handleFormSubmission(event){
-    event.preventDefault()
-    if(document.activeElement){
-        document.activeElement.blur();
-    }
-    
-    onSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>'
-    let userUrl = resultToBeSent.value;
-    try {
-        const response = await axios.post('/submit', {userUrl});
-
-        console.log('Resposta do servidor:', response.data);
-        console.log(response.data.link);
-        link.innerText = response.data.link;      
-        document.getElementById('result-text-share').innerHTML = response.data.link;
-
-        onSubmit.innerHTML = '<i class="ph ph-check-fat" style="color: var(--success-color);"></i>'
-        setTimeout(() => {
-            onSubmit.innerHTML = '<i class="ph ph-paper-plane-tilt"></i>';
-        }, 3000);
-        
-        resultForm.classList.remove('hidden');
-
-        setTimeout(() => {
-            resultForm.classList.add('hidden')
-        }, 15000);
-
-        setTimeout(() => {
-            resultToBeSent.value = ''
-        }, 16000);
-    
-
-    } catch (error) {
-        const inputEmpty = resultToBeSent.value === '';
-        let message = '';
-    
-        if (inputEmpty) {
-            message = 'Link field must not be empty';
-            FeedbackErrorMessage(message, onSubmit, resultToBeSent);
-            throw new Error(message);
-        }
-    
-        const errorCode = error?.response?.data?.errorCode;
-    
-        switch (errorCode) {
-            case 'SERVICE_UNAVAILABLE':
-                message = 'Service unavailable. Try again later.';
-                break;
-    
-            case 'INVALID_URL':
-                message = 'Please enter a valid URL';
-                break;
-    
-            case 'INTERNAL_ERROR':
-                message = 'Internal error. check your connection or try again.';
-                break;
-
-            case'ETIMEDOUT':
-                message = 'Trouble connecting. check your connection or try again later.'
-                break
-    
-            default:
-                message = 'Unexpected error. check your connection or try again.';
-        }
-    
-        FeedbackErrorMessage(message, onSubmit, resultToBeSent);
-        resultToBeSent.value = '';
-        throw new Error(message);
-    }
-  
-})
-
+import { handleLongLinkSubmission } from "./submit-link.js";
+handleLongLinkSubmission(); 
 // copy functionalities
 
 toCopy.addEventListener('click',()=>{
