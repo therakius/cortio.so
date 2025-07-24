@@ -1,8 +1,12 @@
 const toCopy = document.getElementById('copy');
 
+export let footer = document.getElementById('footer');
+
 export let link = document.getElementById('result-text');
 
-const feedbackLinkButton = document.getElementById('tofeedback');
+export const socials = document.getElementById('socials');
+
+export const feedbackLinkButton = document.getElementById('tofeedback');
 
 export const feedbackFormDiv = document.getElementById('feedback')
 export const feedbackForm = document.getElementById('feedback-form')
@@ -11,11 +15,11 @@ const feedbackFormExit = document.querySelector('#feedback-exit');
 
 export const onSubmit = document.getElementById('submit-btn');
 
-const toShare = document.querySelector('#share');
+export const toShare = document.querySelector('#share');
 
-const popup = document.getElementById('share-popup');
+export const popup = document.getElementById('share-popup');
 
-const exitShare = document.getElementById('exit')
+export const exitShare = document.getElementById('exit')
 
 export const resultForm = document.getElementById('result-form');
 
@@ -33,6 +37,15 @@ export let blurred = [resultForm, document.getElementById('input-form'), documen
 
 let message = ''
 
+
+import { handleLongLinkSubmission } from "./submit-link.js";
+handleLongLinkSubmission(); 
+
+import { handleLinkSharing, handleSocialsSharing } from "./link-sharing-handler.js";
+handleLinkSharing();
+handleSocialsSharing();
+
+
 //global functions
 
 async function copyFunctionality(item, button, options = {}) {
@@ -41,11 +54,10 @@ async function copyFunctionality(item, button, options = {}) {
     try {
         await navigator.clipboard.writeText(copiedText);
 
-        // Se foi passada alguma função de feedback visual, usa ela
         if (typeof options.onSuccess === 'function') {
             options.onSuccess(button);
         } else {
-            // Estilo padrão
+
             button.innerHTML = '<i class="ph ph-check-fat"></i>';
             button.style.color = "var(--success-color)";
             setTimeout(() => {
@@ -76,52 +88,20 @@ export const FeedbackErrorMessage = (message, clickedButton, messageContainer)=>
 }
 
 
-
-exitShare.addEventListener("click", function handleExitShare(){
-
-    popup.classList.remove('active');
-    
-    document.getElementById('footer').style.zIndex = -1;
-
-    popup.addEventListener('transitionend', function handler(){
-        document.getElementById('footer').style.zIndex = 'auto';
-    })
-
-})
-
-toShare.addEventListener('click', async function handleShareFunctionality(){
-
-    await navigator.clipboard.writeText(link.innerText);
-
-    popup.classList.add('active');
-    document.getElementById('footer').style.zIndex = -1;
-
-    if(!feedbackLinkButton.classList.contains('inactive')){
-        feedbackFormDiv.classList.add('inactive')
-    }
-
-    popup.addEventListener('transitionend', ()=>{
-        document.getElementById('footer').style.zIndex = -1;
-    })
-
-})
-
-// submitting the long link
-import { handleLongLinkSubmission } from "./submit-link.js";
-handleLongLinkSubmission(); 
-// copy functionalities
-
-toCopy.addEventListener('click',()=>{
-   copyFunctionality(link, toCopy, {onSuccess: (btn)=>{
-    btn.innerHTML = ' copied <i class="ph ph-check-fat"></i>';
-    btn.style.color = "var(--success-color)";
-
-    setInterval(() => {
-        btn.innerHTML = ' copy <i class="ph ph-clipboard-text"></i>';
-        btn.style.color = "black";
-    }, 3000);
-   }})
-});
+toCopy.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await copyFunctionality(link, toCopy, {
+        onSuccess: (btn) => {
+            btn.innerHTML = 'Copied <i class="ph ph-check-fat"></i>';
+            btn.style.color = "var(--success-color)";
+            setTimeout(() => {
+                btn.innerHTML = 'Copy <i class="ph ph-clipboard-text"></i>';
+                btn.style.color = "black";
+            }, 3000);
+        }
+    });
+}
+);  
 
 
 copyFromShare.addEventListener('click', () => {
@@ -143,7 +123,7 @@ feedbackLinkButton.addEventListener('click', function handleFeedbackFormPopup(ev
     event.preventDefault()
 
     popup.addEventListener('transitionend', function handler(){
-        document.getElementById('footer').style.zIndex = 'auto';
+        footer.style.zIndex = 'auto';
     })
     
     feedbackFormDiv.classList.remove('inactive')
@@ -189,55 +169,6 @@ feedbackFormExit.addEventListener('click', function handleFeedbackformExit(){
     })
 
 
-
-})
-
-
-// function to return object with links to the apps
-function linksToApp(){
-
-    const shareTo = {
-        text: encodeURIComponent("Check this out - it might be usefull for you"),
-        link: encodeURIComponent(link.innerText)
-    }
-
-    const body = `Check this out! it might be useful for you: ${encodeURIComponent(link.innerText)}`;
-
-
-    const socials = {
-        whatsapp: `https://web.whatsapp.com/send?text=${shareTo.text}%20${shareTo.link}`,
-        telegram: `https://web.telegram.org/k/#@share/url?url=${shareTo.link}&text=${shareTo.text}`,
-        twitter: `https://twitter.com/intent/tweet?url=${shareTo.link}&text=${shareTo.text}`,
-        linkedin: `https://linkedin.com/sharing/share-offsite/?url=${shareTo.link}&text=${shareTo.text}`,
-        email: `mailto:?subject=${encodeURIComponent("Interesting")}&body=${body}`,
-        facebook: `https://facebook.com/sharer/sharer.php?u=${shareTo.link}`
-        
-    }
-
-    return socials;
-}
-
-// Sharing event
-
-document.getElementById('socials').addEventListener('click', (e)=>{
-
-    popup.classList.remove('active')
-
-    const social = e.target.dataset.social;
-
-    console.log(social)
-    setTimeout(() => {
-         if(social && linksToApp()[social]) {
-        window.open(linksToApp()[social], "_blank")
-         }
-    }, 800);
-
-    popup.addEventListener('transitionend', function handler(){
-        document.getElementById('footer').style.zIndex = 'auto';
-    })
-   
-
-    console.log(linksToApp()[social]);
 
 })
 
@@ -356,7 +287,6 @@ copyShareButtons[1].addEventListener('click', async (e)=>{
 
       try {
         await navigator.share(shareData);
-        // resultPara.textContent = "MDN shared successfully";
       } catch (err) {
         console.error(err);
       }
@@ -379,8 +309,6 @@ feedbackLinkButton.addEventListener('click', (e)=>{
         feedbackLinkButton.classList.add('hidden')
     }
 })
-
-console.log(screen.width)
 
 if (document.documentElement.clientWidth < 600) {
     const buttonC = document.getElementById('form-copy-btn')

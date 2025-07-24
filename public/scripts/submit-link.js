@@ -17,9 +17,7 @@ export function handleLongLinkSubmission(){
     let userUrl = resultToBeSent.value;
     try {
         const response = await axios.post('/submit', {userUrl});
-
-        console.log('Resposta do servidor:', response.data);
-        console.log(response.data.link);
+        
         link.innerText = response.data.link;      
         document.getElementById('result-text-share').innerHTML = response.data.link;
 
